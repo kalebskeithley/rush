@@ -1,31 +1,29 @@
-
 mod general;
-use crate::general::general::*;
+use crate::general::*;
 
 use std::env;
 
-fn main(){
+fn main() {
+    let _argc = env::Args::len(&env::args());
 
-  let _argc=env::Args::len(&env::args());
-
-  loop {
-    let top_level = || -> Result<(), TopErrors> {
-      do_top_init()?;
-      Ok(())
-    };
-    if let Err(_err) = top_level() {
-      println!("Caught top error");
+    loop {
+        let top_level = || -> Result<(), TopErrors> {
+            do_top_init()?;
+            Ok(())
+        };
+        if let Err(_err) = top_level() {
+            println!("Caught top error");
+        }
     }
-  }
 }
 
 enum TopErrors {
-  TopError,
+    TopError,
 }
 
-fn do_top_init() -> Result<(), TopErrors>{
-  let _err=TopErrors::TopError;
-  println!("top_init");
-  check_dev_tty();
-  Ok(())
+fn do_top_init() -> Result<(), TopErrors> {
+    let _err = TopErrors::TopError;
+    println!("top_init");
+    check_dev_tty();
+    Ok(())
 }
